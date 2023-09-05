@@ -10,10 +10,16 @@ public class GameManager : MonoBehaviour
     public Text currentScoreText;
     public Text highScoreText;
 
+    public Button soundButton;
+    public Sprite onSoundSprite;
+    public Sprite offSoundSprite;
+
     private int score;
 
-    private void Start() //inicial
+    private void Start() 
     {
+        SetMusicSprite();
+
         NewGame();
     }
 
@@ -65,6 +71,33 @@ public class GameManager : MonoBehaviour
     private int LoadHighScore()
     {
         return PlayerPrefs.GetInt("HighScore", 0);
+    }
+
+    private void SetMusicSprite()
+    {
+        if (PlayerPrefs.GetFloat("Volume") == 0)
+        {
+            soundButton.GetComponent<Image>().sprite = offSoundSprite;
+        }
+        else
+        {
+            soundButton.GetComponent<Image>().sprite = onSoundSprite;
+        }
+    }
+
+    public void SetMusicVolume()
+    {
+        if (PlayerPrefs.GetFloat("Volume") == 0)
+        {
+            AudioManager.instance.OnMusic();
+            SetMusicSprite();
+        }
+        else
+        {
+            AudioManager.instance.OffMusic();
+            SetMusicSprite();
+        }
+
     }
 
     private IEnumerator Fade(CanvasGroup canvasGroup, float to, float delay)

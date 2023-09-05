@@ -48,27 +48,25 @@ public class TileBoard : MonoBehaviour
     {
         if (!waiting)
         {
-            #region ПК
-            if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow))
+            if (SwipeController.swipeUp)
             {
                 MoveTiles(Vector2Int.up, 0, 1, 1, 1);
             }
 
-            else if (Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.DownArrow))
+            else if (SwipeController.swipeDown)
             {
                 MoveTiles(Vector2Int.down, 0, 1, grid.height - 2, -1);
             }
 
-            else if (Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.LeftArrow))
+            else if (SwipeController.swipeLeft)
             {
                 MoveTiles(Vector2Int.left, 1, 1, 0, 1);
             }
 
-            else if (Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow))
+            else if (SwipeController.swipeRight)
             {
                 MoveTiles(Vector2Int.right, grid.width - 2, -1, 0, 1);
             }
-            #endregion
         }
     }
 
